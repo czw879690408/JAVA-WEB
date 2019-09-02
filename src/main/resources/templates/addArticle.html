@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+</head>
+<body>
+    <form action="/article/add" method="post">
+        <input th:type="hidden" th:name="pubid" th:value="${pubid}">
+        <input th:name="content" th:type="text">
+        <input th:type="submit">
+    </form>
+
+</body>
+</html>
