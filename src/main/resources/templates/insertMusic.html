@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加音乐</title>
+    <script>
+        function show(){
+            // var file,filelist,mySpan;
+            var file=document.getElementById("file");
+            var filelist=file.files;
+            var mySpan=document.getElementById("mySpan");
+            var names="";
+            for(var i=0;i<filelist.length;i++){
+                names+=filelist[i].name+"<br/>";
+
+            }
+            mySpan.innerHTML=names;
+        }
+    </script>
+</head>
+<body>
+    <form th:action="@{upload}" enctype="multipart/form-data" th:method="post">
+        <input type="file" th:name="music" onchange="show()" accept="audio/*" id="file" multiple />
+        <input type="submit" onclick="show();" value="上传文件" /><br />
+        <span id="mySpan"></span>
+    </form>
+</body>
+</html>

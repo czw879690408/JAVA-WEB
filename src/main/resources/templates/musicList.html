@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>music</title>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        window.onload = function () {
+            $.ajax({
+                url:"getAllMusic",
+                type:"POST",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data,function (i,music) {
+                        $("#music").append("<tr>\n" +
+                            "<td>"+music.musicName+"</td>\n" +
+                            "<td>"+music.musicType+"</td>\n" +
+                            "<td><audio src=\""+music.musicDirectory +"\" controls=\"controls\">歌曲不存在</audio></td>")
+                        // document.getElementById("music").appendChild()
+                    })
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<audio src="/../static/music/吕雯 - 飞鸟和鱼3.mp3" controls="controls">歌曲不存在</audio>
+<table th:id="music">
+    <tr>
+        <td>歌名</td>
+        <td>会员</td>
+        <td></td>
+    </tr>
+</table>
+<!--<table th:id="music" th:each="music:${music}" th:object="${music}">-->
+    <!--<tr>-->
+        <!--<td th:text="*{musicName}">歌名</td>-->
+        <!--<td th:text="*{musicType}">会员</td>-->
+        <!--<td><audio th:src="@{${music.musicDirectory}}" controls="controls"></audio> </td>-->
+    <!--</tr>-->
+<!--</table>-->
+<a th:href="@{insert}">新增歌曲</a>
+</body>
+</html>
