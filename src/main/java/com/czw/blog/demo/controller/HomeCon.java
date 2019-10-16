@@ -20,41 +20,41 @@ import java.util.*;
 public class HomeCon {
 
     @Autowired
-    ArticleServ     articleServ;
+    ArticleServ articleServ;
 
 
     @Autowired
-    UserServ        userServ;
+    UserServ userServ;
 
     //主页
     @GetMapping("")
-    public String home(Map<String, Object> map , HttpServletRequest request){
+    public String home(Map<String, Object> map, HttpServletRequest request) {
         //获取Session里的user
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         //获取所有微博
         List<Article> articles = articleServ.findAll();
         Collections.reverse(articles);
 //        System.out.println("articles = " + articles);
         //存储文章相关的用户
-        Map<Integer,Object> users = new HashMap<>();
+        Map<Integer, Object> users = new HashMap<>();
         //存储用户ID
         Set<Integer> set = new HashSet<Integer>();
         //遍历获取用户ID
-        for (Article article:articles) {
-            System.out.println("articleid:"+article.getId());
+        for (Article article : articles) {
+            System.out.println("articleid:" + article.getId());
             set.add(article.getPubId());
         }
         //获取用户
-        for (Integer i:set){
-            System.out.println("i:"+i);
-            users.put(i,userServ.selectById(i));
+        for (Integer i : set) {
+            System.out.println("i:" + i);
+            users.put(i, userServ.selectById(i));
         }
 
-        map.put("user",user);
+        map.put("user", user);
         System.out.println("user:" + user);
-        map.put("users",users);
+        map.put("users", users);
         System.out.println("users = " + users.get(1));
-        map.put("articles",articles);
+        map.put("articles", articles);
         System.out.println("articles = " + articles);
         return "homes";
     }

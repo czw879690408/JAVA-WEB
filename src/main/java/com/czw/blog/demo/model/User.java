@@ -7,6 +7,15 @@ public class User {
     private String  userPassword;
     private Integer userAge;
     private Integer userSex;
+    private Integer type;
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
     @Override
     public String toString() {

@@ -50,7 +50,8 @@
 				<div class="blog-nav pull-right">
 					<ul class="layui-nav pull-left">
 					  <li class="layui-nav-item layui-this"><a href="index.html">首页</a></li>
-					  <li class="layui-nav-item"><a href="message.html">留言</a></li>
+						<li class="layui-nav-item"><a href="message.html">留言</a></li>
+						<li class="layui-nav-item"><a  th:href="@{article/add(pubid=${user.id})}" href="message.html">写博文</a></li>
 					  <li class="layui-nav-item"><a href="about.html">关于</a></li>
 					</ul>
 					<a href="#" class="personal pull-left">
@@ -64,16 +65,16 @@
 				</div>
 			</div>
 			<ul class="pop-nav" id="pop-nav">
+				<li><a th:href="@{article/add}">写博文</a></li>
 				<li><a href="index.html">首页</a></li>
-				<li><a href="message.html">留言</a></li>
-				<li><a href="about.html">关于</a></li>
+
 			</ul>
 		</div>
 		<div class="container-wrap">
 			<div class="container">
 					<div class="contar-wrap">
 						<h4 class="item-title">
-							<p><i class="layui-icon layui-icon-speaker"></i>公告：<span>欢迎来到我的轻博客</span></p>
+							<p><i class="layui-icon layui-icon-speaker"></i>公告：<span>欢迎来到我的轻博客&nbsp;&nbsp;<span style="color: #880000" th:text="${user.userName}"></span></span></p>
 						</h4>
 						<div class="item" th:id="${article.id}" th:each="article:${articles}" th:object="${article}">
 							<div class="item-box  layer-photos-demo1 layer-photos-demo">
@@ -89,9 +90,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="item-btn">
-						<button class="layui-btn layui-btn-normal">下一页</button>
-					</div>
+					<!--<div class="item-btn">-->
+						<!--<button class="layui-btn layui-btn-normal">下一页</button>-->
+					<!--</div>-->
 			</div>
 		</div>
 		<div class="footer">

@@ -14,13 +14,27 @@ public class ArticleServ {
     @Autowired
     ArticleMapper articleMapper;
 
+    @Autowired
+    CommentServ commentServ;
+
+
     public int addArticle(String content, Integer pubid){
         java.util.Date utilDate=new java.util.Date();
         java.sql.Date sqlDate=new java.sql.Date(utilDate.getTime());
        return articleMapper.insert(content,sqlDate,pubid);
     }
 
+    public int deleteByPubId(Integer id){
+        List<Article> article = articleMapper.selectByPubId(id);
+        for (Article a : article) {
+            commentServ.deleteByArticleId(a.getId());
+            articleMapper.deleteArticleById(a.getId());
+        }
+        return 1;
+    }
+
     public int deleteArticle(Integer id){
+        commentServ.deleteByArticleId(id);
         return articleMapper.deleteArticleById(id);
     }
 
@@ -32,12 +46,16 @@ public class ArticleServ {
         return articleMapper.selectById(id);
     }
 
-    public void commentNumIncrease(Integer id){
-        articleMapper.updateCommentNum(articleMapper.selectById(id).getCommentNum()+1,id);
+    public int commentNumIncrease(Integer id){
+        return articleMapper.updateCommentNum(articleMapper.selectById(id).getCommentNum()+1,id);
     }
 
-    public void likenumIncrease(Integer id){
-        articleMapper.updateLikenum(articleMapper.selectById(id).getLikenum()+1,id);
+    public int likenumIncrease(Integer id){
+        return articleMapper.updateLikenum(articleMapper.selectById(id).getLikenum()+1,id);
+    }
+
+    public int updateArticle(Integer id,String content){
+        return articleMapper.update(content,id);
     }
 
 }

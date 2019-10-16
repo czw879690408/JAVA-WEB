@@ -22,25 +22,23 @@ import java.util.Map;
 public class LoginCon {
 
     @Autowired
-    UserMapper userMapper;
-
-    @Autowired
     UserServ userServ;
 
     //登陆
     @GetMapping("")
-    public String index(HttpServletRequest request, Map<String,Object> map){
+    public String index(HttpServletRequest request, Map<String, Object> map) {
         return "index";
     }
 
     @PostMapping("login")
-    public String login(@RequestParam("account") String account, @RequestParam("password") String password, HttpSession session, Map<String,Object> map){
+    public String login(@RequestParam("account") String account, @RequestParam("password") String password, HttpSession session, Map<String, Object> map) {
         User user = userServ.selectByAccount(account);
-        if(user!=null && user.getUserPassword().equals(password)) {
+        if (user != null && user.getUserPassword().equals(password)) {
             session.setAttribute("user", user);
+            if(user.getType() == 1)
 //            map.put("user", user);
-            return "redirect:home";
-        }
-        else return "index";
+                return "redirect:home";
+            else return "redirect:admin";
+        } else return "index";
     }
 }

@@ -39,7 +39,10 @@ public interface ArticleMapper {
     @Delete("delete from article where id=#{id}")
     public int  deleteArticleById(Integer id);
 
+    @Delete("delete FROM article WHERE pubId=#{id}")
+    public int deleteBuPubId(Integer id);
+
     //修改内容
     @Update("update article set content=#{content} where id=#{id}")
-    public int  update(String content,Integer id);
+    public int  update(@Param("content") String content,@Param("id") Integer id);
 }

@@ -48,6 +48,7 @@ public class ArticleCon {
     @PostMapping("like")
     public void addLikenum(@RequestParam("articleid") Integer articleid,
                              @RequestParam("fromid") Integer fromid){
+        System.out.println("like add...");
         evaluateServ.creatEvaluateForArticle(fromid,articleid);
         articleServ.likenumIncrease(articleid);
 //        return "../homes";

@@ -16,17 +16,23 @@ public interface CommentMapper {
     @Select("select * from comment where id=#{id}")
     public Comment selectById(Integer id);
 
+    @Select("select * from comment where articleId=#{id}")
+    public List<Comment> selectByArticleId(Integer id);
+
     @Select("SELECT * FROM comment WHERE pubId=#{id}")
     public List<Comment> selectByPubId(Integer id);
 
     //插入
     @Insert("INSERT INTO comment(content,pubId,articleId,likenum) VALUE (#{content},#{pubId},#{articleId},0)")
-    public int insert(@Param("content") String content,@Param("pubId") Integer pubId,@Param("articleId") Integer articleId);
+    public int insert(@Param("content") String content, @Param("pubId") Integer pubId, @Param("articleId") Integer articleId);
 
     //修改
     @Update("UPDATE comment SET content=#{content} WHERE id=#{id}")
-    public int update(String content,Integer id);
+    public int update(@Param("content") String content, @Param("id") Integer id);
 
     @Delete("DELETE FROM comment WHERE id=#{id}")
     public int delete(Integer id);
+
+    @Delete("DELETE FROM comment WHERE articleId=#{id}")
+    public int deleteByArticleId(Integer id);
 }

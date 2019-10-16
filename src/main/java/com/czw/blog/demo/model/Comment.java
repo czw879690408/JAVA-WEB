@@ -7,6 +7,14 @@ public class Comment {
     private Integer articleId;
     private Integer likenum;
 
+    public Integer getLikenum() {
+        return likenum;
+    }
+
+    public void setLikenum(Integer likenum) {
+        this.likenum = likenum;
+    }
+
     @Override
     public String toString() {
         return "Comment{" +

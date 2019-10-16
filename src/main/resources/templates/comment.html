@@ -57,13 +57,30 @@
 								<img  th:src="@{/res/static/images/item.png}" src="../res/static/images/item.png"
 								 alt="帅哥">
 								<div class="count layui-clear">
-									<span class="pull-left">阅读 <em>100000+</em></span>
+									<span class="pull-left">阅读 <em>999+</em></span>
 									<span class="pull-right like">
 										<i class="layui-icon layui-icon-praise"></i>
 										<em>[[*{likenum}]]</em></span>
 								</div>
 							</div>
-						</div>	
+						</div>
+						<div class="info-box"  th:each="comment:${comments}" th:object="${comment}">
+							<div class="info-item">
+								<!--<img class="info-img" src="{{ d.avatar }}" alt="">-->
+								<div class="info-text">
+									<p class="title">
+										<span class="name" th:text="${users.get(comment.getPubId()).userName}"></span>
+										<span class="info-img">
+											<i class="layui-icon layui-icon-praise"></i>
+											[[*{likenum}]]
+										</span>
+									</p>
+									<p class="info-intr" th:text="*{content}">
+										{{ d.content }}
+									</p>
+								</div>
+							</div>
+						</div>
 						<form class="layui-form" th:action="@{/comment/adds}" method="post">
 							<div  class="layui-form-item layui-form-text">
                                 <input th:type="hidden" th:name="articleid" th:value="${article.id}">
@@ -87,30 +104,30 @@
 	<script th:src="@{/res/layui/layui.js}" src="../res/layui/layui.js">
 
 	</script>
-	<script>
-		layui.config({
-		  // base: '../res/static/js/'
-           base: '@{/res/static/js/}'
-		}).use('blog');
-	</script>
-	<script id="LAY-msg-tpl" type="text/html">
-		<div class="info-box" th:each="comment:${comments}" th:object="${comment}">
-			<div class="info-item">
-				<img class="info-img" src="{{ d.avatar }}" alt="">
-			  <div class="info-text">
-					<p class="title">
-					  <span class="name" th:text="${users.get(comment.getPubId()).userName}"></span>
-					  <span class="info-img">
-					  	<i class="layui-icon layui-icon-praise"></i>
-					  	{{ d.praise }}
-					 	</span>
-					</p>
-					<p class="info-intr" th:text="*{content}">
-						{{ d.content }}
-					</p>
-			  </div>
-			</div>
-		</div>
-	</script>
+	<!--<script>-->
+		<!--layui.config({-->
+		  <!--// base: '../res/static/js/'-->
+           <!--base: '@{/res/static/js/}'-->
+		<!--}).use('blog');-->
+	<!--</script>-->
+	<!--<script id="LAY-msg-tpl" type="text/html">-->
+		<!--<div class="info-box" th:each="comment:${comments}" th:object="${comment}">-->
+			<!--<div class="info-item">-->
+				<!--&lt;!&ndash;<img class="info-img" src="{{ d.avatar }}" alt="">&ndash;&gt;-->
+			  <!--<div class="info-text">-->
+					<!--<p class="title">-->
+					  <!--<span class="name" th:text="${users.get(comment.getPubId()).userName}"></span>-->
+					  <!--<span class="info-img">-->
+					  	<!--<i class="layui-icon layui-icon-praise"></i>-->
+					  	<!--{{ d.praise }}-->
+					 	<!--</span>-->
+					<!--</p>-->
+					<!--<p class="info-intr" th:text="*{content}">-->
+						<!--{{ d.content }}-->
+					<!--</p>-->
+			  <!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	  </script>
 </body>
 </html>
